@@ -18,19 +18,30 @@ public class Pattern2 extends Thread{
 	public void run() {
 		
 		synchronized (lock) {
+			
+			
 			for (int i = 0; i < count ; i++) {
-				System.out.print("Pattern 01 Thread -");
+				System.out.print("Pattern 02 Thread -");
 				for (int k = count; k > i; k--) 
 					 System.out.print(" ");
 				
 				for (int j = 0; j < i; j++) {
-					 System.out.print(pattern);
+					 System.out.print(" "+pattern);
 				}
 				System.out.println();
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
  
+					e.printStackTrace();
+				}
+				
+				
+				lock.notify();
+				try {
+					lock.wait();
+				} catch (InterruptedException e) {
+
 					e.printStackTrace();
 				}
 			}

@@ -23,7 +23,7 @@ public class Pattern1 extends Thread{
 				for (int k = count; k > i; k--) 
 					 System.out.print(" ");
 								for (int j = 0; j < i; j++) {
-					 System.out.print(pattern);
+					 System.out.print(" "+pattern);
 				}
 				System.out.println();
 				try {
@@ -31,8 +31,18 @@ public class Pattern1 extends Thread{
 				} catch (InterruptedException e) {
  
 					e.printStackTrace();
+			
+				}
+				
+				lock.notify();
+				try {
+					lock.wait();
+				} catch (InterruptedException e) {
+ 					e.printStackTrace();
 				}
 			}
+			
+			
 		}
 		
 	}
