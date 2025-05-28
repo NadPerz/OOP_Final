@@ -8,7 +8,7 @@ public class LaunchMissile implements Missileoperation {
  	public LaunchMissile(Missilesystem missile) {
 		this.missile = missile;
 	}
-
+   
 
 	@Override
 	public void initiateoperation(String location) {

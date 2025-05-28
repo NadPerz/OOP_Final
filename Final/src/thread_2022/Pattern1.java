@@ -34,9 +34,9 @@ public class Pattern1 extends Thread{
 			
 				}
 				
-				lock.notify();
+				lock.notify();  // wake another thread 
 				try {
-					lock.wait();
+					lock.wait();// releas the lock
 				} catch (InterruptedException e) {
  					e.printStackTrace();
 				}

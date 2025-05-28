@@ -1,9 +1,10 @@
 package thread_2023;
 
 public class EvenOddPrinter {
-	private static final int MAX_NUM = 20;
-	private static volatile int nextNum = 1; //thread safe
-	private static final Object lock = new Object();//key use syncrhonized
+	//private remove because it seprate by another clz
+	static final int MAX_NUM = 20; 
+	static volatile int nextNum = 1; //thread safe
+	static final Object lock = new Object();//key use syncrhonized
 		
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -20,34 +21,27 @@ public class EvenOddPrinter {
 	}
 
 	
-	public static class EvenRunnable implements Runnable  {
-
-		
-		
-		 
-		public void run() {
-			while(nextNum <=MAX_NUM) {
-				synchronized (lock) {
-					if(nextNum %2 == 1) {
-						System.out.println(Thread.currentThread().getName()+":"+ nextNum);
-						nextNum++;
-						lock.notify();
-						
-					}else {
-						try {
-							
-							lock.wait();
-						} catch (InterruptedException e) {
- 
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-			
-		}
-
-	}
+	/*
+	 * public static class EvenRunnable implements Runnable {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * public void run() { while(nextNum <=MAX_NUM) { synchronized (lock) {
+	 * if(nextNum %2 == 0) {
+	 * System.out.println(Thread.currentThread().getName()+":"+ nextNum); nextNum++;
+	 * lock.notify();
+	 * 
+	 * }else { try {
+	 * 
+	 * lock.wait(); } catch (InterruptedException e) {
+	 * 
+	 * e.printStackTrace(); } } } }
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 	
 	
 	public static class OddRunnable implements Runnable {
@@ -56,7 +50,7 @@ public class EvenOddPrinter {
 		public void run() {
 			while(nextNum <=MAX_NUM) {
 				synchronized (lock) {
-					if(nextNum %2 == 0) {
+					if(nextNum %2 == 1) {
 						System.out.println(Thread.currentThread().getName()+":"+ nextNum);
 						nextNum++;
 						lock.notify();
