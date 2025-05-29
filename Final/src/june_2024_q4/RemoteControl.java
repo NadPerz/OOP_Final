@@ -4,20 +4,19 @@ public class RemoteControl {
 
 	private static RemoteControl controller;
 	
-	private Command[] command;
+	private Command[] command ;
 	private int slot;
 	
 	
 	
 	private RemoteControl() {
-		
+		command = new Command[10];
 	}
 
-	private static RemoteControl getInstance() {
+	public static RemoteControl getInstance() {
 		
 		if(controller == null) {
 			controller  = new RemoteControl();
-			System.out.println("Instanciate the RemoteControl");
 		}
 		
 		return controller;
@@ -29,17 +28,20 @@ public class RemoteControl {
 	
 
 
-	public void setCommand(int slot,Command command) {
-		this.command = command;
-		this.slot = slot;
+	public void setCommand(int slot,Command cmnd) {
+		  if (slot >= 0 && slot < command.length) {
+	            command[slot] = cmnd;  // Store command at specific slot
+	        }
 	}
-	
-	
-	
-	public void pressButton(int slot) {
 
+	public void pressButton(int i) {
+		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
+	 
 	
 	
 }
